@@ -1,0 +1,6 @@
+name = "embedaportal"
+compatibility_date = "2026-04-13"
+
+# Production: `npm run build` outputs the site to ./dist (Vite).
+[assets]
+directory = "./dist"

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      portal-widget {
+        display: block;
+        width: 100%;
+        color:black;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <portal-widget bg-color="transparent" font-color="#FFFFFF" resorts='[
+      {
+        "id": "01",
+        "name": "Royal\nCaribbean",
+        "location": "Montego Bay, Jamaica",
+        "bg": "#000000",
+        "image": "/sandals-1.jpg",
+        "position": [-1.15, 0, 0],
+        "rotation": [0, 0.5, 0]
+      },
+      {
+        "id": "02",
+        "name": "Grande\nSt. Lucian",
+        "location": "Gros Islet, St. Lucia",
+        "bg": "#000000",
+        "image": "/sandals-3.jpg",
+        "position": [0, 0, 0],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "id": "03",
+        "name": "Barbados",
+        "location": "St. Lawrence Gap, Barbados",
+        "bg": "#000000",
+        "image": "/sandals-2.jpg",
+        "position": [1.15, 0, 0],
+        "rotation": [0, -0.5, 0]
+      }
+    ]'></portal-widget>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

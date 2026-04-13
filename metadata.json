@@ -1,0 +1,5 @@
+{
+  "name": "embedaportal",
+  "description": "Embeddable 3D Portals WebComponent",
+  "requestFramePermissions": []
+}
