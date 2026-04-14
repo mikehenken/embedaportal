@@ -6,7 +6,20 @@ React Three Fiber “portal” frames shipped as a **`<portal-widget>`** custom 
 
 **Requirements:** GitHub repo must stay **public** for the Deploy to Cloudflare button.
 
-**Deploy to Cloudflare (GitHub button):** [Workers Builds auto-detects](https://developers.cloudflare.com/workers/platform/deploy-buttons/#best-practices) **`scripts.build`** and **`scripts.deploy`** in `package.json` and pre-fills the wizard. This repo sets **`build`** → `vite build` and **`deploy`** → `wrangler deploy` (build + deploy are separate steps on Cloudflare, so `deploy` must not bundle `npm run build` or you’d run Vite twice). If the UI is still blank, enter **Build:** `npm run build` and **Deploy:** `npx wrangler deploy` manually. **`[assets] directory = "./dist"`** is only in `wrangler.toml`; the form does not set it—`npm run build` must run first so `dist/` exists.
+### Configure the repo so the first-time Deploy form can pre-fill
+
+Cloudflare reads your **public repo** when someone opens the wizard from the button. Per [Deploy to Cloudflare — best practices](https://developers.cloudflare.com/workers/platform/deploy-buttons/#best-practices), do this:
+
+| Requirement | Why |
+|-------------|-----|
+| **`package.json` → `scripts.build`** | Must exist and compile the app (here: `vite build` → `dist/`). **Name must be exactly `build`.** |
+| **`package.json` → `scripts.deploy`** | Must deploy only (here: `wrangler deploy`). **Name must be exactly `deploy`.** Do **not** put `npm run build && …` in `deploy`—the platform runs build then deploy as two steps; chaining build inside `deploy` can confuse detection or run Vite twice. |
+| **`wrangler.toml` at repo root** | Declares the Worker and **`[assets] directory = "./dist"`** (not a field on the web form). |
+| **`wrangler` in `package.json`** | Listed so `npx wrangler deploy` (or `npm run deploy`) resolves the same version Workers Builds expects. |
+| **`package-lock.json` committed** | Reproducible `npm ci` / install on their build runners. |
+| **Deploy button URL** | Use `https://deploy.workers.cloudflare.com/?url=https://github.com/OWNER/REPO` with the app at **repo root** (or use Cloudflare’s documented subdirectory flow if the Worker lives in a subfolder). |
+
+If the wizard still shows empty commands, enter **Build:** `npm run build` and **Deploy:** `npx wrangler deploy` manually—same outcome.
 
 ## Develop
 
