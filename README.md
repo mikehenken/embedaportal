@@ -6,7 +6,7 @@ React Three Fiber “portal” frames shipped as a **`<portal-widget>`** custom 
 
 **Requirements:** GitHub repo must stay **public** for the Deploy to Cloudflare button.
 
-**Deploy to Cloudflare (GitHub button):** the wizard often **does not** infer a Vite build. You must set **Build command** to `npm run build` (install + build is handled if the template runs `npm install` first; otherwise use `npm ci && npm run build`). Set **Deploy command** to `npx wrangler deploy`. If you skip the build step, `dist/` is wrong or empty even though `wrangler.toml` correctly says `[assets] directory = "./dist"` — that path is **not** a field in the button form; Wrangler reads it from the repo. The form only needs to **produce** `dist/` before deploy runs.
+**Deploy to Cloudflare (GitHub button):** [Workers Builds auto-detects](https://developers.cloudflare.com/workers/platform/deploy-buttons/#best-practices) **`scripts.build`** and **`scripts.deploy`** in `package.json` and pre-fills the wizard. This repo sets **`build`** → `vite build` and **`deploy`** → `wrangler deploy` (build + deploy are separate steps on Cloudflare, so `deploy` must not bundle `npm run build` or you’d run Vite twice). If the UI is still blank, enter **Build:** `npm run build` and **Deploy:** `npx wrangler deploy` manually. **`[assets] directory = "./dist"`** is only in `wrangler.toml`; the form does not set it—`npm run build` must run first so `dist/` exists.
 
 ## Develop
 
@@ -19,8 +19,10 @@ npm run dev
 
 ```bash
 npm install
-npm run deploy
+npm run ship
 ```
+
+(`ship` runs `vite build` then `wrangler deploy`. Or run `npm run build` and `npm run deploy` separately.)
 
 ## Lint (TypeScript)
 
