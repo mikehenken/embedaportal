@@ -1,6 +1,11 @@
 name = "embedaportal"
 compatibility_date = "2026-04-13"
 
-# Production: `npm run build` outputs the site to ./dist (Vite).
+# Runs before `wrangler dev` / `wrangler deploy` so `dist/` exists (Vite → ./dist).
+# https://developers.cloudflare.com/workers/wrangler/custom-builds/
+[build]
+command = "npm run build"
+watch_dir = "src"
+
 [assets]
 directory = "./dist"
