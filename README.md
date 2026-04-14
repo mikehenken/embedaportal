@@ -6,7 +6,7 @@ React Three Fiber “portal” frames shipped as a **`<portal-widget>`** custom 
 
 **Requirements:** GitHub repo must stay **public** for the Deploy to Cloudflare button.
 
-**Cloudflare Workers Builds:** set **Build command** to `npm run build` and **Deploy command** to `npx wrangler deploy` (or rely on defaults and confirm in the UI).
+**Deploy to Cloudflare (GitHub button):** the wizard often **does not** infer a Vite build. You must set **Build command** to `npm run build` (install + build is handled if the template runs `npm install` first; otherwise use `npm ci && npm run build`). Set **Deploy command** to `npx wrangler deploy`. If you skip the build step, `dist/` is wrong or empty even though `wrangler.toml` correctly says `[assets] directory = "./dist"` — that path is **not** a field in the button form; Wrangler reads it from the repo. The form only needs to **produce** `dist/` before deploy runs.
 
 ## Develop
 
