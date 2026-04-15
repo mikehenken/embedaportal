@@ -3,13 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <meta name="theme-color" content="#FFC107" />
+    <title>EmbedPortal · ITRADE Innovations</title>
+    <link rel="icon" href="/itrade-logo.png" type="image/png" />
     <style>
+      :root {
+        --itrade-accent: #ffc107;
+      }
       html, body {
         margin: 0;
         padding: 0;
         width: 100%;
         height: 100%;
+      }
+      .itrade-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        pointer-events: none;
+      }
+      .itrade-accent-bar {
+        height: 3px;
+        background: var(--itrade-accent);
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+      }
+      .itrade-brand {
+        display: inline-block;
+        margin: 10px 0 0 12px;
+        padding: 8px 12px 10px;
+        max-width: min(260px, calc(100vw - 24px));
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 0 0 10px 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-top: 2px solid var(--itrade-accent);
+      }
+      .itrade-brand img {
+        display: block;
+        height: auto;
+        max-height: 48px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
       }
       portal-widget {
         display: block;
@@ -20,6 +55,12 @@
     </style>
   </head>
   <body>
+    <div class="itrade-shell">
+      <div class="itrade-accent-bar" aria-hidden="true"></div>
+      <div class="itrade-brand">
+        <img src="/itrade-logo.png" alt="ITRADE Innovations" width="220" height="56" />
+      </div>
+    </div>
     <portal-widget bg-color="transparent" font-color="#FFFFFF" resorts='[
       {
         "id": "01",
